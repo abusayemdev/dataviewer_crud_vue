@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!--META TAG-->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Dataviewer API</title>
+
+    <!--FACEBOOK/LINKEDIN-->
+	<meta property="og:image" content="https://authdesk.dev/projects/dataviewer_coverphoto.jpg">
+    <meta property="og:image:type" content="image/jpg">
+    <meta property="og:image:width" content="800">
+    <meta property="og:image:height" content="500">
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://www.authdesk.dev/projects/product_dataviewer" />
+    <meta property="og:title" content="Product Dataviewer API" />
+    <meta property="og:description" content="Dataviewer API is a single page web API application that can be used to add, update and delete data from cross-platform." />
+
+    <!--CSS-->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!--.app start-->
+    <div class="app">
+        <div class="container">
+            <h1 style="text-align: center;">Product Dataviewer API</h1>
+            <div class="row">
+                <h4 class="float-left">All Products</h4>
+                <button class="float-right" @click="productAddModel=true">Add New Product</button>
+            </div>
+
+            <!--alert messages-->
+            <div v-if="successMessage" class="alert success">{{ successMessage }} <button @click="clearMessage">X</button></div>
+            <div v-if="errorMessage" class="alert dengar">{{ errorMessage }} <button @click="clearMessage">X</button></div>
+
+            <!--table start-->
+            <table>
+                <tr>
+                    <th>ID</th>
+                    <th>Product Name</th>
+                    <th>Product Brand</th>
+                    <th>Product Price</th>
+                    <th>Action</th>
+                </tr>     
+                <tr v-for="product in products">
+                    <td>{{product.id}}</td>
+                    <td>{{product.product_name}}</td>
+                    <td>{{product.product_brand}}</td>
+                    <td>{{product.product_price}}</td>
+                    <td>
+                        <button @click="productUpdateModel = true; setUpdateData(product);">Edit</button>
+                        <button @click="deleteProduct(product.id)">Delete</button>
+                    </td>
+                </tr>
+            </table>
+            <!--table end-->
+
+        </div>
+    
+        <!--Product add  model start-->
+        <div class="model" v-if="productAddModel">
+            <div class="model-content">
+                <div class="model-header">
+                    <div class="float-left">
+                        <h4>Add New Product</h4>
+                    </div>
+                    <div class="float-right">
+                        <button @click="productAddModel=false">X</button>
+                    </div>
+                </div>
+                <br>
+                <hr>
+                <div class="model-body">
+                    <form action="">
+                        <table>
+                            <tr>
+                                <th><label>Product Name</label></th>
+                                <td><input type="text" v-model="form.product_name"></td>
+                            </tr>
+                            <tr>
+                                <th><label>Product Brand</label></th>
+                                <td><input type="text" v-model="form.product_brand"></td>
+                            </tr>
+                            <tr>
+                                <th><label>Product Price</label></th>
+                                <td><input type="text" v-model="form.product_price"></td>
+                            </tr>
+                        </table>
+                        <br>
+                        <button class="float-right" type="button" @click="productAddModel=false; addNewProduct()">Save</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <!--Product add model end-->
+
+        <!--Product update model start-->
+        <div class="model" v-if="productUpdateModel">
+            <div class="model-content">
+                <div class="model-header">
+                    <div class="float-left">
+                        <h4>Update Product</h4>
+                    </div>
+                    <div class="float-right">
+                        <button @click="productUpdateModel=false">X</button>
+                    </div>
+                </div>
+                <br>
+                <hr>
+                <div class="model-body">
+                    <form action="">
+                        <table>
+                            <tr>
+                                <th><label>Product Name</label></th>
+                                <td><input type="text" v-model="updateProduct.product_name"></td>
+                            </tr>
+                            <tr>
+                                <th><label>Product Brand</label></th>
+                                <td><input type="text" v-model="updateProduct.product_brand"></td>
+                            </tr>
+                            <tr>
+                                <th><label>Product Price</label></th>
+                                <td><input type="text" v-model="updateProduct.product_price"></td>
+                            </tr>
+                        </table>
+                        <br>
+                        <button class="float-right" type="button" @click="productUpdateModel=false; updateProductData()">Update</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <!--Product update model end-->
+        
+        <br>
+    </div>
+    <!--.app end-->
+
+
+
+    <!--js files start -->
+    <script src="js/vue.js"></script>
+    <script src="js/axios.min.js"></script>
+    <script src="js/custom.js"></script>
+    <!--js files end-->
+
+    <!--
+    Name: Product Dataviewer API
+    Type: Dataviewer
+    Languages: PHP 
+    Frameworks: Vue
+    Published URL: "https://www.authdesk.dev/projects/product_dataviewer/"
+    Author: Authdesk
+    Author URL: "https://www.authdesk.dev/"
+
+    -->
+
+    
+</body>
+</html>
